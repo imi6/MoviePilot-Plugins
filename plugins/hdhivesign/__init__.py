@@ -1,6 +1,6 @@
 """
-影巢签到插件
-版本: 1.0.0
+影巢签到插件-修改
+版本: 2.0.0
 作者: madrays
 功能:
 - 自动完成影巢(HDHive)每日签到
@@ -10,7 +10,7 @@
 - 默认使用代理访问
 
 修改记录:
-- v1.0.0: 初始版本，基于影巢网站结构实现自动签到
+- v2.0.0: 初始版本，基于影巢网站结构实现自动签到 修改api
 """
 import time
 import requests
@@ -36,13 +36,13 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 class HdhiveSign(_PluginBase):
     # 插件名称
-    plugin_name = "影巢签到"
+    plugin_name = "影巢签到-修改"
     # 插件描述
     plugin_desc = "自动完成影巢(HDHive)每日签到，支持失败重试和历史记录"
     # 插件图标
     plugin_icon = "https://raw.githubusercontent.com/madrays/MoviePilot-Plugins/main/icons/hdhive.ico"
     # 插件版本
-    plugin_version = "1.0.0"
+    plugin_version = "2.0.0"
     # 插件作者
     plugin_author = "madrays"
     # 作者主页
@@ -69,9 +69,9 @@ class HdhiveSign(_PluginBase):
     _current_trigger_type = None  # 保存当前执行的触发类型
 
     # 影巢站点配置
-    _site_url = "https://hdhive.online/"
-    _signin_api = "https://hdhive.online/api/customer/user/checkin"
-    _user_info_api = "https://hdhive.online/api/customer/user/info"
+    _site_url = "https://hdhive.com/"
+    _signin_api = "https://hdhive.com/api/customer/user/checkin"
+    _user_info_api = "https://hdhive.com/api/customer/user/info"
 
     def init_plugin(self, config: dict = None):
         # 停止现有任务
@@ -391,12 +391,12 @@ class HdhiveSign(_PluginBase):
                 return False, "Cookie中缺少'token'"
 
             user_id = None
-            referer = "https://hdhive.online/"
+            referer = "https://hdhive.com/"
             try:
                 decoded_token = jwt.decode(token, options={"verify_signature": False, "verify_exp": False})
                 user_id = decoded_token.get('sub')
                 if user_id:
-                    referer = f"https://hdhive.online/user/{user_id}"
+                    referer = f"https://hdhive.com/user/{user_id}"
             except Exception as e:
                 logger.warning(f"从Token中解析用户ID失败，将使用默认Referer: {e}")
 
@@ -406,7 +406,7 @@ class HdhiveSign(_PluginBase):
             headers = {
                 'User-Agent': ua,
                 'Accept': 'application/json, text/plain, */*',
-                'Origin': 'https://hdhive.online',
+                'Origin': 'https://hdhive.com',
                 'Referer': referer,
                 'Authorization': f'Bearer {token}',
             }
@@ -772,7 +772,7 @@ class HdhiveSign(_PluginBase):
                                         'props': {
                                             'type': 'info',
                                             'variant': 'tonal',
-                                            'text': '【使用教程】\n1. 登录影巢(hdhive.online)，按F12打开开发者工具。\n2. 切换到"应用(Application)" -> "Cookie"，或"网络(Network)"选项卡，找到发往API的请求。\n3. 复制完整的Cookie字符串。\n4. 确保Cookie中包含 `token` 和 `csrf_access_token` 字段。\n5. 粘贴到上方输入框，启用插件并保存。\n\n⚠️ 影巢需要代理访问，插件会自动使用系统配置的代理。'
+                                            'text': '【使用教程】\n1. 登录影巢(hdhive.com)，按F12打开开发者工具。\n2. 切换到"应用(Application)" -> "Cookie"，或"网络(Network)"选项卡，找到发往API的请求。\n3. 复制完整的Cookie字符串。\n4. 确保Cookie中包含 `token` 和 `csrf_access_token` 字段。\n5. 粘贴到上方输入框，启用插件并保存。\n\n⚠️ 影巢需要代理访问，插件会自动使用系统配置的代理。'
                                         }
                                     }
                                 ]
