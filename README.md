@@ -1,11 +1,11 @@
 # MoviePilot-Plugins
 
-这是一个MoviePilot的**第三方插件库**，提供签到相关功能扩展。
+声明
+我们在开发过程中使用的部分代码来源于 GitHub 上由 madrays 用户发布的 MoviePilot-Plugins 仓库。在此基础上，我们进行了必要的修改和优化，以满足我们项目的需求并提升用户体验。在使用过程中，我们将始终尊重开源许可，并在项目中明确标识这些代码的来源。
 
-## 插件列表
+项目名称：MoviePilot-Plugins
+原作者：madrays (https://github.com/madrays/MoviePilot-Plugins )
 
-### 影巢论坛签到插件-修改（fengchaosignin）
-- 自动完成影巢论坛签到，支持历史记录
 
 ### 影巢论坛签到插件-修改
 1. 获取Cookie：登录影巢论坛后，按F12打开开发者工具，在网络或应用程序选项卡中复制Cookie
